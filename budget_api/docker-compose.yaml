@@ -1,0 +1,21 @@
+version: '3'
+services:
+  budget_api:
+    build:
+      context: ./
+      dockerfile: ./docker/Dockerfile
+    ports:
+      - "80:80"
+    links:
+      - db
+    depends_on:
+      - db
+  db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 31032020
+    volumes:
+      - ./docker/pgdata:/var/lib/postgresql/data
